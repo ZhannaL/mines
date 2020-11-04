@@ -1,0 +1,27 @@
+.gamePage {
+  display: flex;
+}
+
+.gameField {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gamePageSettings {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.gamePageSetting {
+  text-decoration: none;
+  margin-top: 10px;
+  width: 20vw;
+}
+
+.gamePageSettingBtn {
+  width: 100%;
+}

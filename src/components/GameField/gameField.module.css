@@ -1,0 +1,15 @@
+.field {
+  display: grid;
+}
+
+.fieldElement {
+  padding: 3px;
+  margin: 3px;
+  min-height: 15px;
+  min-width: 15px;
+}
+
+.fieldWrapper {
+  padding: 5px;
+  /* width: auto; */
+}
