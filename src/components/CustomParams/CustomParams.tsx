@@ -5,12 +5,12 @@ import { useGameInfo } from 'src/Provider/GameContext';
 import { InputNumber } from '../InputNumber';
 import style from './customParams.module.css';
 
-const params = localStorage.getItem('params');
-const defaultParams = params
-  ? JSON.parse(params)
-  : { width: 33, height: 44, mines: 160 };
-
 export const CustomParams = (): JSX.Element => {
+  const params = localStorage.getItem('params');
+  const defaultParams = params
+    ? JSON.parse(params)
+    : { width: 33, height: 44, mines: 160 };
+
   const [, setGameState] = useGameInfo();
   const [width, setWidth] = useState(defaultParams.width);
   const [height, setHeight] = useState(defaultParams.height);
