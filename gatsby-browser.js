@@ -10,14 +10,27 @@ import React from 'react';
 import {
   StylesProvider,
   CssBaseline,
-  // MuiThemeProvider,
+  MuiThemeProvider,
+  createMuiTheme,
 } from '@material-ui/core';
+import { GameInfoProvider } from './src/Provider/GameContext';
+
+const theme = createMuiTheme({
+  palette: {
+    // type: 'dark',
+    primary: {
+      main: '#00b5ad',
+    },
+  },
+});
 
 export const wrapRootElement = ({ element }) => (
-  <StylesProvider injectFirst>
-    {/* <MuiThemeProvider theme={theme}> */}
-    <CssBaseline />
-    {element}
-    {/* </MuiThemeProvider> */}
-  </StylesProvider>
+  <GameInfoProvider>
+    <StylesProvider injectFirst>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {element}
+      </MuiThemeProvider>
+    </StylesProvider>
+  </GameInfoProvider>
 );

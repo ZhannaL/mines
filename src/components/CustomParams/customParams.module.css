@@ -1,0 +1,26 @@
+.customPage {
+  display: flex;
+  flex-direction: column;
+
+  margin: auto;
+  width: 20vw;
+}
+
+.customPageLink {
+  text-decoration: none;
+}
+
+.customPageBtn {
+  width: 100%;
+  height: 100%;
+}
+
+.customBtns {
+  margin-top: 10px;
+}
+
+.customParams > * {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}

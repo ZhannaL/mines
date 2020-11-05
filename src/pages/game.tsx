@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { Button } from '@material-ui/core';
 import { GameField } from '../components/GameField';
 import style from './game.module.css';
+import { useGameInfo } from '../Provider/GameContext';
 
 const getInnerHeight = (nodeEl: HTMLElement) => {
   const computed = getComputedStyle(nodeEl);
@@ -21,9 +22,12 @@ const getInnerWidth = (nodeEl: HTMLElement) => {
 };
 
 const GamePage = (): JSX.Element => {
+  const [gameState] = useGameInfo();
+  const { width, height, mines } = gameState;
+
   const [gameFieldwrapperWidth, setGameFieldwrapperWidth] = useState(0);
   const [gameFieldwrapperHeight, setGameFieldwrapperHeight] = useState(0);
-  console.log(style);
+
   const ref = useRef(null);
   const gameFieldwrapper = useCallback((node) => {
     ref.current = node;
@@ -54,8 +58,19 @@ const GamePage = (): JSX.Element => {
         className={style.gameField}
       >
         <GameField
-          parentWidth={(gameFieldwrapperHeight * 10) / 16}
-          parentHeight={gameFieldwrapperHeight}
+          width={width}
+          height={height}
+          mines={mines}
+          parentWidth={
+            width <= height
+              ? (gameFieldwrapperHeight * width) / height
+              : gameFieldwrapperWidth
+          }
+          parentHeight={
+            width > height
+              ? (gameFieldwrapperWidth * height) / width
+              : gameFieldwrapperHeight
+          }
         />
       </div>
       <div className={style.gamePageSettings}>

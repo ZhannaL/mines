@@ -3,13 +3,14 @@
 }
 
 .gameField {
+  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .gamePageSettings {
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;

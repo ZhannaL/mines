@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Paper } from '@material-ui/core';
+
+import { Button } from '@material-ui/core';
 import style from './gameField.module.css';
 
 type Props = Readonly<{

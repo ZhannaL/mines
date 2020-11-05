@@ -5,6 +5,12 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.homePageBtn {
+.homePageLink {
+  text-decoration: none;
   margin: 5px;
+}
+
+.homePageBtn {
+  width: 100%;
+  height: 100%;
 }

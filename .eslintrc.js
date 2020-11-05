@@ -7,6 +7,7 @@ module.exports = {
     'prettier/react',
   ],
   rules: {
+    'import/no-unresolved': 'off',
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off', // useless
     'typescript-eslint/ban-ts-comment': 'off',
