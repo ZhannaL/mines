@@ -12,7 +12,6 @@ import {
   CssBaseline,
   MuiThemeProvider,
   createMuiTheme,
-  NoSsr,
 } from '@material-ui/core';
 
 import { GameInfoProvider } from './src/Provider/GameContext';
@@ -27,14 +26,12 @@ const theme = createMuiTheme({
 });
 
 export const wrapRootElement = ({ element }) => (
-  <NoSsr>
-    <GameInfoProvider>
-      <StylesProvider injectFirst>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          {element}
-        </MuiThemeProvider>
-      </StylesProvider>
-    </GameInfoProvider>
-  </NoSsr>
+  <GameInfoProvider>
+    <StylesProvider injectFirst>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {element}
+      </MuiThemeProvider>
+    </StylesProvider>
+  </GameInfoProvider>
 );
