@@ -1,12 +1,29 @@
 .field {
   display: grid;
+  overflow: auto;
+  padding: 5px;
+  box-shadow: none;
+}
+
+.field::-webkit-scrollbar {
+  width: 0.8em;
+}
+
+.field::-webkit-scrollbar-track {
+  border-radius: 4px;
+  padding-left: 13px;
+}
+
+.field::-webkit-scrollbar-thumb {
+  border-radius: 4px;
 }
 
 .fieldElement {
   padding: 3px;
-  margin: 3px;
+  margin: 2px;
   min-height: 15px;
   min-width: 15px;
+  box-shadow: none;
 }
 
 .fieldWrapper {

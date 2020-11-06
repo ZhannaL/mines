@@ -1,7 +1,23 @@
 import React from 'react';
-
-import { Button } from '@material-ui/core';
+import classnames from 'classnames';
+import {
+  Button,
+  Paper,
+  makeStyles,
+  createStyles,
+  Theme,
+} from '@material-ui/core';
 import style from './gameField.module.css';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    thumb: {
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: theme.palette.primary.main,
+      },
+    },
+  })
+);
 
 type Props = Readonly<{
   width?: number;
@@ -15,17 +31,19 @@ type Props = Readonly<{
 export const GameField = ({
   width = 10,
   height = 16,
-  mines = 20,
-  parentWidth = 100,
-  parentHeight = 160,
+  mines,
+  parentWidth,
+  parentHeight,
 }: Props): JSX.Element => {
   const fieldsElements = new Array(width * height).fill('');
+  const classes = useStyles();
+
   return (
-    <div
-      className={style.field}
+    <Paper
+      className={classnames(style.field, classes.thumb)}
       style={{
         gridTemplateColumns: `repeat(${width}, 1fr)`,
-        width: `${parentWidth}px`,
+        minWidth: `${parentWidth}px`,
         height: `${parentHeight}px`,
       }}
     >
@@ -38,6 +56,6 @@ export const GameField = ({
           {element}
         </Button>
       ))}
-    </div>
+    </Paper>
   );
 };

@@ -29,10 +29,15 @@ type Props = {
 };
 
 export const GameInfoProvider = ({ children }: Props): JSX.Element => {
+  const params = localStorage.getItem('params');
+  const defaultParams = params
+    ? JSON.parse(params)
+    : { width: 33, height: 44, mines: 160 };
+
   const [gameState, setGameState] = useState<GameState>({
-    width: 0,
-    height: 0,
-    mines: 0,
+    width: defaultParams.width,
+    height: defaultParams.height,
+    mines: defaultParams.mines,
   });
   const value = useMemo(() => [gameState, setGameState], [gameState]);
   return (

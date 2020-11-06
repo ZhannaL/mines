@@ -54,7 +54,7 @@ const GamePage = (): JSX.Element => {
     <div className={style.gamePage}>
       <div
         ref={gameFieldwrapper}
-        style={{ width: '60vw', height: '100vh' }}
+        style={{ minWidth: '60vw', maxWidth: '80vw', height: '100vh' }}
         className={style.gameField}
       >
         <GameField

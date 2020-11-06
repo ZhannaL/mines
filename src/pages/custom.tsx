@@ -1,14 +1,8 @@
 import React from 'react';
-
 import { CustomParams } from 'src/components/CustomParams';
-import { NoSsr } from '@material-ui/core';
 
 const Custom = (): JSX.Element => {
-  return (
-    <NoSsr>
-      <CustomParams />
-    </NoSsr>
-  );
+  return <CustomParams />;
 };
 
 export default Custom;

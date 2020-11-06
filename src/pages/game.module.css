@@ -1,5 +1,6 @@
 .gamePage {
   display: flex;
+  justify-content: center;
 }
 
 .gameField {
@@ -10,6 +11,7 @@
 }
 
 .gamePageSettings {
+  max-width: 40vw;
   padding: 15px;
   display: flex;
   flex-direction: column;
