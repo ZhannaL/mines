@@ -5,7 +5,7 @@ import { HomePage } from '../components/HomePage';
 const IndexPage = (): JSX.Element => {
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <meta charSet="utf-8" />
         <link rel="icon" href="/src/images/mine-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
