@@ -1,8 +1,7 @@
 .homePageBtns {
   display: grid;
-  width: 100%;
-  height: 70vh;
   grid-template-columns: 1fr 1fr;
+  margin: auto;
 }
 
 .homePageLink {
@@ -13,4 +12,6 @@
 .homePageBtn {
   width: 100%;
   height: 100%;
+  min-width: 150px;
+  min-height: 150px;
 }

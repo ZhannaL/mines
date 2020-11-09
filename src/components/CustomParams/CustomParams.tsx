@@ -63,8 +63,8 @@ export const CustomParams = (): JSX.Element => {
         </Link>
         <Link to="/" className={style.customPageLink}>
           <Button
-            variant="contained"
-            color="primary"
+            variant="outlined"
+            color="default"
             className={style.customPageBtn}
           >
             Cancel

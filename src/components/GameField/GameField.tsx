@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = Readonly<{
   width?: number;
   height?: number;
-  mines?: number;
+  minesPercent?: number;
 
   parentWidth?: number;
   parentHeight?: number;
@@ -31,11 +31,13 @@ type Props = Readonly<{
 export const GameField = ({
   width = 10,
   height = 16,
-  mines,
+  minesPercent = 2,
   parentWidth,
   parentHeight,
 }: Props): JSX.Element => {
   const fieldsElements = new Array(width * height).fill('');
+  const mines = Math.ceil(((width * height) / 100) * minesPercent);
+
   const classes = useStyles();
 
   return (

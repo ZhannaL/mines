@@ -1,25 +1,10 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Link } from 'gatsby';
 import { Button } from '@material-ui/core';
+import { getInnerWidth, getInnerHeight } from 'src/hooks/getInnerSize';
 import { GameField } from '../components/GameField';
 import style from './game.module.css';
 import { useGameInfo } from '../Provider/GameContext';
-
-const getInnerHeight = (nodeEl: HTMLElement) => {
-  const computed = getComputedStyle(nodeEl);
-  const padding =
-    parseInt(computed.paddingTop, 10) + parseInt(computed.paddingBottom, 10);
-
-  return nodeEl.clientHeight - padding;
-};
-
-const getInnerWidth = (nodeEl: HTMLElement) => {
-  const computed = getComputedStyle(nodeEl);
-  const padding =
-    parseInt(computed.paddingLeft, 10) + parseInt(computed.paddingRight, 10);
-
-  return nodeEl.clientWidth - padding;
-};
 
 const GamePage = (): JSX.Element => {
   const [gameState] = useGameInfo();
@@ -60,7 +45,7 @@ const GamePage = (): JSX.Element => {
         <GameField
           width={width}
           height={height}
-          mines={mines}
+          minesPercent={mines}
           parentWidth={
             width <= height
               ? (gameFieldwrapperHeight * width) / height
