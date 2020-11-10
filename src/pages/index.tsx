@@ -15,7 +15,7 @@ const IndexPage = (): JSX.Element => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <meta name="description" content="Mine App" />
-        <base target="_blank" href="https://mines-react.netlify.app/" />
+        {/* <base target="_blank" href="https://mines-react.netlify.app/" /> */}
         <link rel="canonical" href="https://mines-react.netlify.app/" />
         <noscript>You need to enable JavaScript to run this app.</noscript>
       </Helmet>

@@ -1,0 +1,24 @@
+.fieldElement {
+  padding: 3px;
+  margin: 2px;
+  min-height: 25px;
+  min-width: 25px;
+  box-shadow: none;
+  border: 1px solid #a3a3a3;
+  background-color: #bdbdbd;
+  outline: none;
+
+  position: relative;
+}
+
+.fieldElement > svg {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 15%;
+  left: 15%;
+}
+
+.fieldElement:hover {
+  background-color: #a3a3a3;
+}

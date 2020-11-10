@@ -55,13 +55,17 @@ export const HomePage = (): JSX.Element => {
             variant="contained"
             color="primary"
             className={style.homePageBtn}
-            onClick={() =>
+            onClick={() => {
               setGameState({
                 width: 8,
                 height: 8,
-                mines: 10,
-              })
-            }
+                mines: 15,
+              });
+              localStorage.setItem(
+                'params',
+                JSON.stringify({ width: 8, height: 8, mines: 15 })
+              );
+            }}
           >
             <Typography variant="h6">
               <b>
@@ -77,13 +81,17 @@ export const HomePage = (): JSX.Element => {
             variant="contained"
             color="primary"
             className={style.homePageBtn}
-            onClick={() =>
+            onClick={() => {
               setGameState({
                 width: 16,
                 height: 16,
-                mines: 40,
-              })
-            }
+                mines: 15.5,
+              });
+              localStorage.setItem(
+                'params',
+                JSON.stringify({ width: 16, height: 16, mines: 15.5 })
+              );
+            }}
           >
             <Typography variant="h6">
               <b>
@@ -99,13 +107,17 @@ export const HomePage = (): JSX.Element => {
             variant="contained"
             color="primary"
             className={style.homePageBtn}
-            onClick={() =>
+            onClick={() => {
               setGameState({
                 width: 30,
                 height: 16,
-                mines: 99,
-              })
-            }
+                mines: 20.5,
+              });
+              localStorage.setItem(
+                'params',
+                JSON.stringify({ width: 30, height: 16, mines: 20.5 })
+              );
+            }}
           >
             <Typography variant="h6">
               <b>

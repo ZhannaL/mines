@@ -6,10 +6,10 @@ import { InputNumber } from '../InputNumber';
 import style from './customParams.module.css';
 
 export const CustomParams = (): JSX.Element => {
-  const params = localStorage.getItem('params');
+  const params = localStorage.getItem('customParams');
   const defaultParams = params
     ? JSON.parse(params)
-    : { width: 33, height: 44, mines: 160 };
+    : { width: 33, height: 44, mines: 16 };
 
   const [, setGameState] = useGameInfo();
   const [width, setWidth] = useState(defaultParams.width);
@@ -33,7 +33,7 @@ export const CustomParams = (): JSX.Element => {
           />
         </div>
         <div>
-          <Typography> Mines </Typography>
+          <Typography> Percent Mines </Typography>
           <InputNumber
             onChange={(value) => setMines(value)}
             defaultValue={mines}
@@ -54,6 +54,10 @@ export const CustomParams = (): JSX.Element => {
               });
               localStorage.setItem(
                 'params',
+                JSON.stringify({ width, height, mines })
+              );
+              localStorage.setItem(
+                'customParams',
                 JSON.stringify({ width, height, mines })
               );
             }}
