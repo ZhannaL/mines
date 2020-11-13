@@ -54,6 +54,7 @@ export const GameField = ({
   parentHeight,
 }: Props): JSX.Element => {
   const classes = useStyles();
+
   const fieldsElements = useMemo(() => {
     const fieldsElementsMines = new Array(width * height).fill('');
     const mines = Math.ceil(((width * height) / 100) * minesPercent);

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Link } from 'gatsby';
 import { Button } from '@material-ui/core';
 import { getInnerWidth, getInnerHeight } from 'src/hooks/getInnerSize';
+import { MinesInfo } from 'src/components/MinesInfo';
 import { GameField } from '../components/GameField';
 import style from './game.module.css';
 import { useGameInfo } from '../Provider/GameContext';
@@ -58,34 +59,40 @@ const GamePage = (): JSX.Element => {
           }
         />
       </div>
+
       <div className={style.gamePageSettings}>
-        <Link to="/" className={style.gamePageSetting}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={style.gamePageSettingBtn}
-          >
-            Start Over
-          </Button>
-        </Link>
-        <Link to="/" className={style.gamePageSetting}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={style.gamePageSettingBtn}
-          >
-            Change Difficulty
-          </Button>
-        </Link>
-        <Link to="/" className={style.gamePageSetting}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={style.gamePageSettingBtn}
-          >
-            Pause
-          </Button>
-        </Link>
+        <div className={style.gamePageSettingsMines}>
+          <MinesInfo />
+        </div>
+        <div className={style.gamePageSettingsBtns}>
+          <Link to="/" className={style.gamePageSetting}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={style.gamePageSettingBtn}
+            >
+              Start Over
+            </Button>
+          </Link>
+          <Link to="/" className={style.gamePageSetting}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={style.gamePageSettingBtn}
+            >
+              Change Difficulty
+            </Button>
+          </Link>
+          <Link to="/" className={style.gamePageSetting}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={style.gamePageSettingBtn}
+            >
+              Pause
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

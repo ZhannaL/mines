@@ -1,0 +1,13 @@
+.minesInfo {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3em;
+  /* font-weight: bold; */
+}
+
+.minesInfo > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}

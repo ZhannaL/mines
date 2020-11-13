@@ -12,11 +12,12 @@
 }
 
 .fieldElement > svg {
+  --sizeSVG: 80%;
   position: absolute;
-  width: 80%;
-  height: 80%;
-  top: 15%;
-  left: 15%;
+  width: var(--sizeSVG);
+  height: var(--sizeSVG);
+  top: calc(calc(100% - var(--sizeSVG)) / 2);
+  left: calc(calc(100% - var(--sizeSVG)) / 2);
 }
 
 .fieldElement:hover {
