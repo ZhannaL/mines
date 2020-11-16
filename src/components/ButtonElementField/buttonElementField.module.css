@@ -9,6 +9,23 @@
   outline: none;
 
   position: relative;
+  user-select: none;
+}
+
+.fieldElement:hover {
+  background-color: #a3a3a3;
+}
+
+.openedElement {
+  background-color: #f1f1f1;
+}
+
+.openedElement:hover {
+  background-color: #e6e6e6;
+}
+
+.fault {
+  background-color: #f50606;
 }
 
 .fieldElement > svg {
@@ -18,8 +35,4 @@
   height: var(--sizeSVG);
   top: calc(calc(100% - var(--sizeSVG)) / 2);
   left: calc(calc(100% - var(--sizeSVG)) / 2);
-}
-
-.fieldElement:hover {
-  background-color: #a3a3a3;
 }

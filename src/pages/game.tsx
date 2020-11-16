@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { Button } from '@material-ui/core';
 import { getInnerWidth, getInnerHeight } from 'src/hooks/getInnerSize';
 import { MinesInfo } from 'src/components/MinesInfo';
+import { GameStatus } from 'src/components/ButtonElementField/ButtonElementField';
 import { GameField } from '../components/GameField';
 import style from './game.module.css';
 import { useGameInfo } from '../Provider/GameContext';
@@ -35,6 +36,7 @@ const GamePage = (): JSX.Element => {
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  const [gameStatus, setGameStatus] = useState<GameStatus>('none');
 
   return (
     <div className={style.gamePage}>
@@ -57,12 +59,13 @@ const GamePage = (): JSX.Element => {
               ? (gameFieldwrapperWidth * height) / width
               : gameFieldwrapperHeight
           }
+          onChangeGameStatus={(status) => setGameStatus(status)}
         />
       </div>
 
       <div className={style.gamePageSettings}>
         <div className={style.gamePageSettingsMines}>
-          <MinesInfo />
+          <MinesInfo gameStatus={gameStatus} />
         </div>
         <div className={style.gamePageSettingsBtns}>
           <Link to="/" className={style.gamePageSetting}>
