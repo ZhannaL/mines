@@ -1,7 +1,8 @@
 /* eslint-disable no-plusplus */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import classnames from 'classnames';
 import { Paper, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { GameFieldElement, GameFieldStatus, GameStatus } from 'src/hooks/types';
 import style from './gameField.module.css';
 import { ButtonElementField } from '../ButtonElementField';
 import {
@@ -9,11 +10,6 @@ import {
   getNumbersToField,
   getIndexesAdjustment,
 } from './helpers';
-import {
-  GameFieldElement,
-  GameFieldStatus,
-  GameStatus,
-} from '../ButtonElementField/ButtonElementField';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +29,8 @@ type Props = Readonly<{
   parentWidth?: number;
   parentHeight?: number;
   onChangeGameStatus: (status: GameStatus) => unknown;
+  onChangeFlagsOnField: (flags: number) => unknown;
+  gameID: number;
 }>;
 
 export const GameField = ({
@@ -42,17 +40,20 @@ export const GameField = ({
   parentWidth,
   parentHeight,
   onChangeGameStatus,
+  onChangeFlagsOnField,
+  gameID,
 }: Props): JSX.Element => {
   const classes = useStyles();
 
-  const fieldsElementsMines = new Array(width * height).fill('');
-  const mines = Math.ceil(((width * height) / 100) * minesPercent);
-  const arrayOfIndexes = fieldsElementsMines.map((el, ind) => ind);
-  const firstField = fieldsElementsMines.map(() => ({
-    content: 0,
-    status: 'close',
-  }));
-  const fieldsElements = () => {
+  const mines = useMemo(
+    () => Math.ceil(((width * height) / 100) * minesPercent),
+    [height, minesPercent, width]
+  );
+
+  const fieldsElements = (indexToSkip: number) => {
+    const fieldsElementsMines = new Array(width * height).fill('');
+    const arrayOfIndexes = fieldsElementsMines.map((el, ind) => ind);
+    arrayOfIndexes.splice(indexToSkip, 1);
     for (let i = 0; i < mines; i++) {
       fieldsElementsMines[findEmptySlotIndex(arrayOfIndexes)] = 'm';
     }
@@ -60,12 +61,26 @@ export const GameField = ({
     return fieldsElementsMines.map((el) => ({ content: el, status: 'close' }));
   };
 
+  const generateEmptyField = useCallback(() => {
+    const fieldsElementsMines = new Array(width * height).fill('');
+    const firstField = fieldsElementsMines.map(
+      () =>
+        ({
+          content: 0,
+          status: 'close',
+        } as const)
+    );
+    return firstField;
+  }, [height, width]);
+
   const [field, setField] = useState<
     Array<{
       content: GameFieldElement;
       status: GameFieldStatus;
     }>
-  >(firstField);
+  >(generateEmptyField);
+  const [gameStatus, setGameStatus] = useState<GameStatus>('none');
+  const [flagsOnField, setFlagsOnField] = useState(0);
   const [isGameFieldGenerated, setIsGameFieldGenerated] = useState(false);
 
   const setStatusToOpen = (
@@ -98,7 +113,7 @@ export const GameField = ({
     };
     setField(innerFn(copied, indexToSet));
   };
-  const [gameStatus, setGameStatus] = useState<GameStatus>('none');
+
   const finishingGameByFault = (
     array: Array<{
       content: GameFieldElement;
@@ -115,9 +130,30 @@ export const GameField = ({
       }
       return el;
     });
-    setGameStatus('finished');
-    onChangeGameStatus('finished');
+    setGameStatus('lost');
+    onChangeGameStatus('lost');
   };
+
+  useEffect(() => {
+    setField(generateEmptyField);
+    setIsGameFieldGenerated(false);
+    setGameStatus('none');
+    onChangeGameStatus('none');
+    setFlagsOnField(0);
+    onChangeFlagsOnField(0);
+  }, [gameID, generateEmptyField, onChangeFlagsOnField, onChangeGameStatus]);
+
+  useEffect(() => {
+    const closed = field.filter((el) => el.status === 'close');
+    const setsMines = field.filter(
+      (el) => el.status === 'flag' && el.content === 'm'
+    );
+    if (closed.length === 0 && setsMines.length === mines) {
+      setGameStatus('finished');
+      onChangeGameStatus('finished');
+    }
+  }, [field, mines, onChangeGameStatus]);
+
   return (
     <Paper
       className={classnames(style.field, classes.thumb)}
@@ -126,6 +162,9 @@ export const GameField = ({
         minWidth: `${parentWidth}px`,
         height: `${parentHeight}px`,
       }}
+      onContextMenuCapture={(event) => {
+        event.preventDefault();
+      }}
     >
       {field.map((element, ind) => (
         <ButtonElementField
@@ -133,9 +172,7 @@ export const GameField = ({
           element={element}
           onChange={() => {
             if (!isGameFieldGenerated) {
-              arrayOfIndexes.splice(ind, 1);
-              const generated = fieldsElements();
-
+              const generated = fieldsElements(ind);
               setStatusToOpen(generated, ind);
               setIsGameFieldGenerated(true);
               setGameStatus('started');
@@ -149,14 +186,30 @@ export const GameField = ({
           }}
           gameStatus={gameStatus}
           onChangeStatusToFlag={() => {
-            setField(
-              field.map((el, index) => {
-                if (ind === index) {
-                  return { content: el.content, status: 'flag' };
-                }
-                return el;
-              })
-            );
+            if (element.status !== 'flag') {
+              setFlagsOnField(flagsOnField + 1);
+              onChangeFlagsOnField(flagsOnField + 1);
+            }
+            if (element.status === 'close') {
+              setField(
+                field.map((el, index) => {
+                  if (ind === index) {
+                    return { content: el.content, status: 'flag' };
+                  }
+                  return el;
+                })
+              );
+            }
+            if (element.status === 'flag') {
+              setField(
+                field.map((el, index) => {
+                  if (ind === index) {
+                    return { content: el.content, status: 'close' };
+                  }
+                  return el;
+                })
+              );
+            }
           }}
         />
       ))}

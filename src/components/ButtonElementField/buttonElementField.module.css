@@ -1,6 +1,6 @@
 .fieldElement {
   padding: 3px;
-  margin: 2px;
+  margin: 1px;
   min-height: 25px;
   min-width: 25px;
   box-shadow: none;
@@ -17,11 +17,18 @@
 }
 
 .openedElement {
-  background-color: #f1f1f1;
+  background-color: #fcfdd7;
 }
 
 .openedElement:hover {
-  background-color: #e6e6e6;
+  background-color: #fcfdd7;
+}
+
+.emptyElement {
+  background-color: #ffffff;
+}
+.emptyElement:hover {
+  background-color: #ffffff;
 }
 
 .fault {
