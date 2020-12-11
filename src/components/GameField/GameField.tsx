@@ -10,6 +10,7 @@ import {
   getNumbersToField,
   getIndexesAdjustment,
 } from './helpers';
+import { ModalWindowFinishedGame } from '../ModalWindowFinishedGame';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -143,6 +144,8 @@ export const GameField = ({
     onChangeFlagsOnField(0);
   }, [gameID, generateEmptyField, onChangeFlagsOnField, onChangeGameStatus]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     const closed = field.filter((el) => el.status === 'close');
     const setsMines = field.filter(
@@ -151,6 +154,7 @@ export const GameField = ({
     if (closed.length === 0 && setsMines.length === mines) {
       setGameStatus('finished');
       onChangeGameStatus('finished');
+      setIsModalOpen(true);
     }
   }, [field, mines, onChangeGameStatus]);
 
@@ -166,6 +170,10 @@ export const GameField = ({
         event.preventDefault();
       }}
     >
+      <ModalWindowFinishedGame
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
       {field.map((element, ind) => (
         <ButtonElementField
           key={ind}
@@ -182,6 +190,9 @@ export const GameField = ({
             }
             if (element.content === 'm') {
               finishingGameByFault(field, ind);
+            }
+            if (element.status === 'open') {
+              // console.log(ind);
             }
           }}
           gameStatus={gameStatus}

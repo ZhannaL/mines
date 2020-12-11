@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 
 import { GameInfoProvider } from './src/Provider/GameContext';
+import { GameTimeProvider } from './src/Provider/TimeContext';
 
 const theme = createMuiTheme({
   palette: {
@@ -26,12 +27,14 @@ const theme = createMuiTheme({
 });
 
 export const wrapRootElement = ({ element }) => (
-  <GameInfoProvider>
-    <StylesProvider injectFirst>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        {element}
-      </MuiThemeProvider>
-    </StylesProvider>
-  </GameInfoProvider>
+  <GameTimeProvider>
+    <GameInfoProvider>
+      <StylesProvider injectFirst>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          {element}
+        </MuiThemeProvider>
+      </StylesProvider>
+    </GameInfoProvider>
+  </GameTimeProvider>
 );

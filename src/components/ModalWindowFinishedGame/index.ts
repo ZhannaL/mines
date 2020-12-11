@@ -1,0 +1,1 @@
+export { ModalWindowFinishedGame } from './ModalWindowFinishedGame';

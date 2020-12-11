@@ -3,9 +3,10 @@ import { useGameInfo } from 'src/Provider/GameContext';
 import FlagIcon from '@material-ui/icons/Flag';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { GameStatus } from 'src/hooks/types';
+import { useGameTime } from 'src/Provider/TimeContext';
 import style from './minesInfo.module.css';
 
-const getTimeString = (seconds: number) => {
+export const getTimeString = (seconds: number): string => {
   const min = Math.floor(seconds / 60);
   const sec = Math.abs(seconds - min * 60);
   return `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`;
@@ -21,6 +22,8 @@ export const MinesInfo = ({ gameStatus, flagsOnField }: Props): JSX.Element => {
   const { width, height, mines: minesPercent } = gameState;
   const mines = Math.ceil(((width * height) / 100) * minesPercent);
 
+  const [, setGameTime] = useGameTime();
+
   const [time, setTime] = useState(0);
   useEffect(() => {
     if (gameStatus === 'started') {
@@ -34,8 +37,11 @@ export const MinesInfo = ({ gameStatus, flagsOnField }: Props): JSX.Element => {
     if (gameStatus === 'none') {
       setTime(0);
     }
+    if (gameStatus === 'finished') {
+      setGameTime(time);
+    }
     return () => setTime(0);
-  }, [gameStatus, time]);
+  }, [gameStatus, setGameTime, time]);
   const secToTimeString = useMemo(() => getTimeString(time), [time]);
 
   return (

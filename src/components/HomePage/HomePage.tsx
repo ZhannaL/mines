@@ -37,6 +37,8 @@ export const HomePage = (): JSX.Element => {
     <div ref={homePageWrapper} style={{ minWidth: '60vw', height: '100vh' }}>
       <div
         style={{
+          padding: '10vw',
+          boxSizing: 'border-box',
           width: `${
             homePageWrapperWidth < 712
               ? homePageWrapperWidth
