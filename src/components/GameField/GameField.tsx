@@ -26,7 +26,6 @@ type Props = Readonly<{
   width?: number;
   height?: number;
   minesPercent?: number;
-
   parentWidth?: number;
   parentHeight?: number;
   onChangeGameStatus: (status: GameStatus) => unknown;
@@ -212,6 +211,8 @@ export const GameField = ({
               );
             }
             if (element.status === 'flag') {
+              setFlagsOnField(flagsOnField - 1);
+              onChangeFlagsOnField(flagsOnField - 1);
               setField(
                 field.map((el, index) => {
                   if (ind === index) {
