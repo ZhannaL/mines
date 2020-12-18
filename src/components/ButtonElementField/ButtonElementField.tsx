@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import FlagIcon from '@material-ui/icons/Flag';
 import classnames from 'classnames';
 import { GameFieldElement, GameFieldStatus, GameStatus } from 'src/hooks/types';
+import Mine from 'src/images/mine.svg';
 import style from './buttonElementField.module.css';
 
 type Props = Readonly<{
@@ -20,7 +21,7 @@ export const ButtonElementField = ({
   element,
   gameStatus,
 }: Props): JSX.Element => {
-  const button = useRef(null);
+  const button = useRef<HTMLButtonElement>(null);
   return (
     <button
       type="button"
@@ -30,7 +31,9 @@ export const ButtonElementField = ({
         element.status === 'open' ? style.openedElement : '',
         element.status === 'open' && element.content === 0
           ? style.emptyElement
-          : ''
+          : '',
+        element.status === 'fault' ? style.faultField : '',
+        element.status === 'mine' ? style.mine : ''
       )}
       onClick={() => {
         if (element.status !== 'flag') {
@@ -59,11 +62,8 @@ export const ButtonElementField = ({
             : element.content
           : ' '}
       </div>
-      {element.status === 'flag' || element.status === 'fault' ? (
-        <FlagIcon color={element.status === 'fault' ? 'error' : 'inherit'} />
-      ) : (
-        ''
-      )}
+      {element.status === 'flag' ? <FlagIcon color="inherit" /> : ''}
+      {element.status === 'fault' || element.status === 'mine' ? <Mine /> : ''}
     </button>
   );
 };

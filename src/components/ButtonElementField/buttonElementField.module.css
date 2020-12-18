@@ -31,10 +31,6 @@
   background-color: #ffffff;
 }
 
-.fault {
-  background-color: #f50606;
-}
-
 .fieldElement > svg {
   --sizeSVG: 80%;
   position: absolute;
@@ -42,4 +38,13 @@
   height: var(--sizeSVG);
   top: calc(calc(100% - var(--sizeSVG)) / 2);
   left: calc(calc(100% - var(--sizeSVG)) / 2);
+}
+
+.mine > svg,
+.faultField > svg {
+  --sizeSVG: 70%;
+}
+
+.faultField > svg > g {
+  fill: #f50606;
 }
